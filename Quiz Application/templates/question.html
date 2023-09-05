@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Quiz Application</title>
+</head>
+<body>
+    <div class="container" style="background-image: url('/static/images/bg1.jpg');background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%;">
+        <div class="question-container">
+            <h1 style="color: black;">Question {{ current_question_index + 1 }}:</h1>
+            <p>Time Remaining: <span id="timer">{{ quiz_time_limit }}</span> seconds</p>
+
+            <p class="question">{{ question['question'] }}</p>
+
+            <form class="quiz-form" action="/quiz" method="post">
+                <ul class="options">
+                {% for option in question['options'] %}
+                <li>
+                    <input type="radio" name="answer" value="{{ option }}" required> {{ option }} <br>
+                </li>
+                {% endfor %}
+                </ul>
+                <br>
+                <button type="submit">NEXT</button>
+            </form>
+            <br>
+            <p>Score: {{ user_score }}</p>
+
+            <a class="btn" href="/result">End Quiz</a>
+        </div>
+    </div>
+    <script>
+        var timer = 30
+        
+        document.getElementById('timer').innerHTML = timer;
+
+        var interval = setInterval(function() {
+            timer--;
+            document.getElementById('timer').innerHTML = timer;
+            if (timer <= 0) {
+                clearInterval(interval);
+                document.querySelector('.quiz-form').submit();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

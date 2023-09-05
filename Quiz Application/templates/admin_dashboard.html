@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Quiz Application</title>
+</head>
+<body>
+    <div class="container">
+        <h1>DashBoard</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Time Taken</th>
+            </tr>
+
+            {% for winner in winners %}
+            <tr>
+                <td>{{ winner[0] }}</td>
+                <td>{{ winner[1] }}</td>
+                <td>{{ winner[2] }} seconds</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="btn" href="/">Back to Home</a>
+    </div>
+</body>
+</html>
